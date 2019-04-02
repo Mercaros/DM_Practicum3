@@ -1,4 +1,4 @@
-package DM_Practicum3;
+package DMPracticum;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("UI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("src/test/DMPracticum/UI.fxml"));
         primaryStage.setTitle("Discrete Mathematics Encryption/Decryption");
         primaryStage.setScene(new Scene(root, 1037, 570));
         primaryStage.show();
