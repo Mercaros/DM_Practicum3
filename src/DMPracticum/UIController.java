@@ -38,6 +38,7 @@ public class UIController {
     @FXML private TextArea decryptionResultOne;
     @FXML private TextArea decryptionResultTwo;
 
+    @FXML
     private void encryptionStepOne() {
         //Other two button will be disabled when running for a second time
         disableEncryptionButtons();
