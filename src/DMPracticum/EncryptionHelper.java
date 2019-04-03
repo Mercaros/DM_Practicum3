@@ -9,10 +9,7 @@ public class EncryptionHelper {
     private String n;
     private int p;
     private int q;
-
-    public EncryptionHelper(String n) {
-        this.n = n;
-    }
+    private BigInteger e;
 
     public void findPAndQ() {
         List<Integer> primeNumbers = PrimeNumbersGenerator.primeNumbersBruteForce(1000);
@@ -29,11 +26,22 @@ public class EncryptionHelper {
         this.q = q;
     }
 
+    public BigInteger calculateE(int p, int q) {
+        BigInteger result = BigInteger.valueOf(p*q);
+        this.e = result;
+
+        return result;
+    }
+
     public int getP() {
         return p;
     }
 
     public int getQ() {
         return q;
+    }
+
+    public void setN(String n) {
+        this.n = n;
     }
 }

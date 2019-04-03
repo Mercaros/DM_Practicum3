@@ -20,7 +20,7 @@ public class UIController {
     private String resultEncryptionStepTwo;
     private String resultEncryptionStepThree;
 
-    private EncryptionHelper encryptionHelper;
+    private EncryptionHelper encryptionHelper = new EncryptionHelper();
 
     @FXML private TextField sentence;
 
@@ -47,7 +47,7 @@ public class UIController {
             showMissingInputError();
             return;
         }
-        encryptionHelper = new EncryptionHelper(sentence.getText());
+        encryptionHelper.setN(sentence.getText());
 
         long start = System.currentTimeMillis();
         encryptionHelper.findPAndQ();
@@ -65,6 +65,11 @@ public class UIController {
 
     @FXML
     private void encryptionStepTwo() {
+        BigInteger e = encryptionHelper.calculateE(encryptionHelper.getP(), encryptionHelper.getQ());
+
+        String result = "e is: " + e;
+        encryptionResultTwoText.setText(result);
+        stepThreeEncryptionButton.setDisable(false);
     }
 
     @FXML
