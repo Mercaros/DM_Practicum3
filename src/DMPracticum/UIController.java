@@ -20,8 +20,7 @@ public class UIController {
     private String resultEncryptionStepTwo;
     private String resultEncryptionStepThree;
 
-    private String resultDecryptionStepOne;
-    private String resultDecryptionStepTwo;
+    private EncryptionHelper encryptionHelper;
 
     @FXML private TextField sentence;
 
@@ -35,6 +34,7 @@ public class UIController {
     @FXML private TextField decryptionSentenceN;
     @FXML private TextField decryptionSentenceE;
     @FXML private TextField decryptionSentenceC;
+
     @FXML private TextArea decryptionResultOne;
     @FXML private TextArea decryptionResultTwo;
 
@@ -46,35 +46,28 @@ public class UIController {
             showMissingInputError();
             return;
         }
+        encryptionHelper = new EncryptionHelper(sentence.getText());
 
-        this.resultEncryptionStepOne = calculateEncryptionStepOne();
-        encryptionResultOneText.setText(this.resultEncryptionStepOne);
+        long start = System.currentTimeMillis();
+        encryptionHelper.findPAndQ();
+        long end = System.currentTimeMillis();
+
+        long elapsedTime = end - start;
+
+        String result = "p is: " + encryptionHelper.getP() +
+                "\nq is: " + encryptionHelper.getQ() +
+                "\nAmount of time busy finding p and q: " + elapsedTime;
+
+        encryptionResultOneText.setText(result);
         stepTwoEncryptionButton.setDisable(false);
-    }
-
-    private String calculateEncryptionStepOne() {
-        String result = sentence.getText();
-        return "The result is: " + result;
     }
 
     @FXML
     private void encryptionStepTwo() {
-        this.resultEncryptionStepTwo = calculateEncryptionStepTwo();
-        stepThreeEncryptionButton.setDisable(false);
-    }
-
-    private String calculateEncryptionStepTwo() {
-        return "";
     }
 
     @FXML
     private void encryptionStepThree() {
-        this.resultEncryptionStepThree = calculateEncryptionStepThree();
-
-    }
-
-    private String calculateEncryptionStepThree() {
-        return "";
     }
 
     private void disableEncryptionButtons() {
