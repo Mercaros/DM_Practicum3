@@ -63,7 +63,7 @@
          </font>
       </Text>
       <Text layoutX="572.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Result:" />
-      <Button disable="true" layoutX="917.0" layoutY="389.0" mnemonicParsing="false" onAction="#decryptionStepTwo" text="Start stap 2" />
+      <Button fx:id="stepTwoDecryptionButton" disable="true" layoutX="917.0" layoutY="389.0" mnemonicParsing="false" onAction="#decryptionStepTwo" text="Start stap 2" />
       <TextArea fx:id="decryptionResultTwo" layoutX="572.0" layoutY="419.0" prefHeight="61.0" prefWidth="440.0" />
       <TextField fx:id="decryptionSentenceE" layoutX="696.0" layoutY="152.0" prefHeight="26.0" prefWidth="315.0" />
       <Text layoutX="571.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input E:" />

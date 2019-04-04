@@ -11,8 +11,6 @@ import java.math.BigInteger;
 import static java.math.BigInteger.ONE;
 
 public class UIController {
-
-    private BigInteger encryptedMessage = new BigInteger("28546624436443611514125411254163066528125416306482212965276777916528790077856306272812903483811622630627281296565282767662129031151463061286948386306272812965652827676621290311514630648226528128692296306790048386306276748381254112541630648382728630611514790012869229662125416528129651254111622471963062495101846528790012541128694838790063069681229662129034436229652827672767");
     private BigInteger n, d, e;
     private BigInteger p, q;
 
@@ -37,6 +35,8 @@ public class UIController {
 
     @FXML private TextArea decryptionResultOne;
     @FXML private TextArea decryptionResultTwo;
+
+    @FXML private Button stepTwoDecryptionButton;
 
     @FXML
     private void encryptionStepOne() {
@@ -90,17 +90,53 @@ public class UIController {
 
     @FXML
     private void decryptionStepOne() {
-        n = new BigInteger("13231");
-        e = new BigInteger("2");
+        n = new BigInteger(decryptionSentenceN.getText());
+        e = new BigInteger(decryptionSentenceE.getText());
+        p = getP(n);
+        q = n.divide(p);
 
         BigInteger phi = (p.subtract(ONE)).multiply(q.subtract(ONE));
 
+        while (phi.gcd(e).intValue() > 1) {
+            e = e.add(new BigInteger("2"));
+        }
+
         d = e.modInverse(phi);
-        decryptionResultOne.setText(String.valueOf(d));
+        decryptionResultOne.setText(d.toString());
+        stepTwoDecryptionButton.setDisable(false);
     }
 
     @FXML
     private void decryptionStepTwo() {
+        BigInteger[] numbers = getEncryptedMessage(decryptionSentenceC.getText());
+        char[] ascii = new char[numbers.length];
+        for (int i = 0; i < numbers.length; i++) {
+            ascii[i] = (char) numbers[i].modPow(d, n).intValueExact();
+            System.out.print(ascii[i]);
+        }
+    }
+
+    public static BigInteger[] getEncryptedMessage(String text) {
+        String[] array = text.split(",");
+        BigInteger[] numbers = new BigInteger[array.length];
+        for (int i = 0; i < array.length; i++) {
+            numbers[i] = new BigInteger(array[i]);
+        }
+        return numbers;
+    }
+
+    public static BigInteger getP(BigInteger value) {
+        BigInteger initNumber = new BigInteger("2");
+        BigInteger n = value;
+        BigInteger p = initNumber;
+
+        while (p.compareTo(n.divide(initNumber)) <= 0) {
+            if (n.mod(p).equals(BigInteger.ZERO)) {
+                return p;
+            }
+            p = p.nextProbablePrime();
+        }
+        return p;
     }
 
 }
