@@ -33,11 +33,18 @@ public class EncryptionHelper {
         return p;
     }
 
-    public BigInteger calculateE(int p, int q) {
-        BigInteger result = BigInteger.valueOf(p*q);
-        this.e = result;
+    public BigInteger calculateE(BigInteger p, BigInteger q) {
+        BigInteger phi = (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));
+        this.e = BigInteger.valueOf(2);
+        return getE(phi.gcd(e), phi, this.e);
+    }
 
-        return result;
+    public static BigInteger getE(BigInteger gcd, BigInteger phi, BigInteger e) {
+        while (gcd.intValue() != 1) {
+            e = e.add(BigInteger.valueOf(1));
+            gcd = phi.gcd(e);
+        }
+        return e;
     }
 
     public BigInteger getP() {

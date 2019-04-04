@@ -63,11 +63,11 @@ public class UIController {
 
     @FXML
     private void encryptionStepTwo() {
-//        BigInteger e = encryptionHelper.calculateE(encryptionHelper.getP(), encryptionHelper.getQ());
-//
-//        String result = "e is: " + e;
-//        encryptionResultTwoText.setText(result);
-//        stepThreeEncryptionButton.setDisable(false);
+        BigInteger e = encryptionHelper.calculateE(encryptionHelper.getP(), encryptionHelper.getQ());
+
+        String result = "e is: " + e;
+        encryptionResultTwoText.setText(result);
+        stepThreeEncryptionButton.setDisable(false);
     }
 
     @FXML
