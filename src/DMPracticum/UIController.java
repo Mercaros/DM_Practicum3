@@ -21,6 +21,7 @@ public class UIController {
     private EncryptionHelper encryptionHelper = new EncryptionHelper();
 
     @FXML private TextField nInput;
+    @FXML private TextField mInput;
 
     @FXML private Button stepTwoEncryptionButton;
     @FXML private Button stepThreeEncryptionButton;
@@ -72,6 +73,15 @@ public class UIController {
 
     @FXML
     private void encryptionStepThree() {
+        if (mInput == null || mInput.getText().isEmpty()) {
+            showMissingInputError();
+            return;
+        }
+
+        String c = encryptionHelper.getC(mInput.getText());
+
+        String result = "Message after encryption is: " + c;
+        encryptionResultThreeText.setText(result);
     }
 
     private void disableEncryptionButtons() {
