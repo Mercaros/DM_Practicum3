@@ -102,30 +102,30 @@ public class UIController {
         }
 
         d = e.modInverse(phi);
-        decryptionResultOne.setText(d.toString());
+        decryptionResultOne.setText("d is " + d.toString());
         stepTwoDecryptionButton.setDisable(false);
     }
 
     @FXML
     private void decryptionStepTwo() {
-        BigInteger[] numbers = getEncryptedMessage(decryptionSentenceC.getText());
-        char[] ascii = new char[numbers.length];
-        for (int i = 0; i < numbers.length; i++) {
-            ascii[i] = (char) numbers[i].modPow(d, n).intValueExact();
-            System.out.print(ascii[i]);
+        BigInteger[] message = getEncryptedMessage(decryptionSentenceC.getText());
+        char[] charArray = new char[message.length];
+        for (int i = 0; i < message.length; i++) {
+            charArray[i] = (char) message[i].modPow(d, n).intValueExact();
         }
+        decryptionResultTwo.setText("Message after decryption is: " + String.valueOf(charArray));
     }
 
-    public static BigInteger[] getEncryptedMessage(String text) {
+    public BigInteger[] getEncryptedMessage(String text) {
         String[] array = text.split(",");
-        BigInteger[] numbers = new BigInteger[array.length];
+        BigInteger[] plaintext = new BigInteger[array.length];
         for (int i = 0; i < array.length; i++) {
-            numbers[i] = new BigInteger(array[i]);
+            plaintext[i] = new BigInteger(array[i]);
         }
-        return numbers;
+        return plaintext;
     }
 
-    public static BigInteger getP(BigInteger value) {
+    public BigInteger getP(BigInteger value) {
         BigInteger initNumber = new BigInteger("2");
         BigInteger n = value;
         BigInteger p = initNumber;
