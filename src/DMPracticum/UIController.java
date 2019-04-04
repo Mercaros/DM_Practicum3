@@ -100,8 +100,9 @@ public class UIController {
     private void decryptionStepOne() {
         n = new BigInteger(decryptionSentenceN.getText());
         e = new BigInteger(decryptionSentenceE.getText());
-        p = getP(n);
-        q = n.divide(p);
+        encryptionHelper.findPAndQ(new BigInteger(decryptionSentenceN.getText()));
+        p = encryptionHelper.getP();
+        q = encryptionHelper.getQ();
 
         BigInteger phi = (p.subtract(ONE)).multiply(q.subtract(ONE));
 
@@ -131,20 +132,6 @@ public class UIController {
             plaintext[i] = new BigInteger(array[i]);
         }
         return plaintext;
-    }
-
-    public BigInteger getP(BigInteger value) {
-        BigInteger initNumber = new BigInteger("2");
-        BigInteger n = value;
-        BigInteger p = initNumber;
-
-        while (p.compareTo(n.divide(initNumber)) <= 0) {
-            if (n.mod(p).equals(BigInteger.ZERO)) {
-                return p;
-            }
-            p = p.nextProbablePrime();
-        }
-        return p;
     }
 
 }
