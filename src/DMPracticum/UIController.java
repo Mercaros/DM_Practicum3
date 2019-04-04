@@ -20,7 +20,8 @@ public class UIController {
 
     private EncryptionHelper encryptionHelper = new EncryptionHelper();
 
-    @FXML private TextField sentence;
+    @FXML private TextField nInput;
+    @FXML private TextField mInput;
 
     @FXML private Button stepTwoEncryptionButton;
     @FXML private Button stepThreeEncryptionButton;
@@ -43,21 +44,19 @@ public class UIController {
         //Other two button will be disabled when running for a second time
         disableEncryptionButtons();
 
-        if (sentence == null || sentence.getText().isEmpty()) {
+        if (nInput == null || nInput.getText().isEmpty()) {
             showMissingInputError();
             return;
         }
-        encryptionHelper.setN(sentence.getText());
 
         long start = System.currentTimeMillis();
-        encryptionHelper.findPAndQ();
-        long end = System.currentTimeMillis();
-
-        long elapsedTime = end - start;
+        encryptionHelper.findPAndQ(new BigInteger(nInput.getText()));
+        long finish = System.currentTimeMillis();
+        long timeElapsed = finish - start;
 
         String result = "p is: " + encryptionHelper.getP() +
                 "\nq is: " + encryptionHelper.getQ() +
-                "\nAmount of time busy finding p and q: " + elapsedTime;
+                "\nAmount of time busy finding p and q: " + timeElapsed + " milliseconds";
 
         encryptionResultOneText.setText(result);
         stepTwoEncryptionButton.setDisable(false);
@@ -74,6 +73,15 @@ public class UIController {
 
     @FXML
     private void encryptionStepThree() {
+        if (mInput == null || mInput.getText().isEmpty()) {
+            showMissingInputError();
+            return;
+        }
+
+        String c = encryptionHelper.getC(mInput.getText());
+
+        String result = "Message after encryption is: " + c;
+        encryptionResultThreeText.setText(result);
     }
 
     private void disableEncryptionButtons() {

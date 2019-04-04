@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("UI.fxml"));
         primaryStage.setTitle("Discrete Mathematics Encryption/Decryption");
-        primaryStage.setScene(new Scene(root, 1037, 570));
+        primaryStage.setScene(new Scene(root, 1037, 617));
         primaryStage.show();
     }
 
