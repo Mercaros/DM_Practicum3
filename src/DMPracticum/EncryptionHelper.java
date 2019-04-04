@@ -1,29 +1,36 @@
 package DMPracticum;
 
 import java.math.BigInteger;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class EncryptionHelper {
 
-    private String n;
-    private int p;
-    private int q;
+    private BigInteger p;
+    private BigInteger q;
     private BigInteger e;
 
-    public void findPAndQ() {
-        List<Integer> primeNumbers = PrimeNumbersGenerator.primeNumbersBruteForce(1000);
+    public void findPAndQ(BigInteger n) {
+        this.p = getP(n);
+        this.q = getQ(n);
+    }
 
-        int p = primeNumbers.get((int) (Math.random() * primeNumbers.size()));
-        int q;
 
-        //Prevents same prime numbers
-        do {
-            q = primeNumbers.get((int) (Math.random() * primeNumbers.size()));
-        } while (p == q);
+    public BigInteger getQ(BigInteger n) {
+        return n.divide(this.p);
+    }
 
-        this.p = p;
-        this.q = q;
+    public static BigInteger getP(BigInteger value) {
+        BigInteger initNumber = new BigInteger("2");
+        BigInteger n = value;
+        BigInteger p = initNumber;
+
+        while (p.compareTo(n.divide(initNumber)) <= 0) {
+            if (n.mod(p).equals(BigInteger.ZERO)) {
+                return p;
+            }
+            p = p.nextProbablePrime();
+        }
+        return p;
     }
 
     public BigInteger calculateE(int p, int q) {
@@ -33,15 +40,11 @@ public class EncryptionHelper {
         return result;
     }
 
-    public int getP() {
+    public BigInteger getP() {
         return p;
     }
 
-    public int getQ() {
+    public BigInteger getQ() {
         return q;
-    }
-
-    public void setN(String n) {
-        this.n = n;
     }
 }
