@@ -55,7 +55,7 @@
       <Text layoutX="571.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input N:" />
       <Line endX="2.0" endY="66.0" layoutX="509.0" layoutY="-18.0" startX="2.0" startY="587.0" stroke="#bcbbbb" />
       <Text layoutX="571.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Result:" />
-      <Button layoutX="917.0" layoutY="212.0" mnemonicParsing="false" onAction="#decryptionStepOne" text="Start stap 1" />
+      <Button layoutX="951.0" layoutY="212.0" mnemonicParsing="false" onAction="#decryptionStepOne" text="Step 1" />
       <TextArea fx:id="decryptionResultOne" layoutX="571.0" layoutY="243.0" prefHeight="61.0" prefWidth="440.0" />
       <Text layoutX="571.0" layoutY="386.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Step 2">
          <font>
@@ -63,7 +63,7 @@
          </font>
       </Text>
       <Text layoutX="572.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Result:" />
-      <Button fx:id="stepTwoDecryptionButton" disable="true" layoutX="917.0" layoutY="389.0" mnemonicParsing="false" onAction="#decryptionStepTwo" text="Start stap 2" />
+      <Button fx:id="stepTwoDecryptionButton" disable="true" layoutX="952.0" layoutY="389.0" mnemonicParsing="false" onAction="#decryptionStepTwo" text="Step 2" />
       <TextArea fx:id="decryptionResultTwo" layoutX="572.0" layoutY="419.0" prefHeight="61.0" prefWidth="440.0" />
       <TextField fx:id="decryptionSentenceE" layoutX="696.0" layoutY="152.0" prefHeight="26.0" prefWidth="315.0" />
       <Text layoutX="571.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Input E:" />
