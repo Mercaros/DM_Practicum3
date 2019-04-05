@@ -22,7 +22,7 @@ public class EncryptionHelper {
         return n.divide(this.p);
     }
 
-    public static BigInteger getP(BigInteger value) {
+    public BigInteger getP(BigInteger value) {
         BigInteger initNumber = new BigInteger("2");
         BigInteger n = value;
         BigInteger p = initNumber;
