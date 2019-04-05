@@ -98,6 +98,10 @@ public class UIController {
 
     @FXML
     private void decryptionStepOne() {
+        if (decryptionSentenceN.getText().isEmpty() || decryptionSentenceE.getText().isEmpty()) {
+            showMissingInputError();
+            return;
+        }
         n = new BigInteger(decryptionSentenceN.getText());
         e = new BigInteger(decryptionSentenceE.getText());
         encryptionHelper.findPAndQ(new BigInteger(decryptionSentenceN.getText()));
@@ -117,6 +121,10 @@ public class UIController {
 
     @FXML
     private void decryptionStepTwo() {
+        if (decryptionSentenceC.getText().isEmpty()) {
+            showMissingInputError();
+            return;
+        }
         BigInteger[] message = getEncryptedMessage(decryptionSentenceC.getText());
         char[] charArray = new char[message.length];
         for (int i = 0; i < message.length; i++) {
